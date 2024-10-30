@@ -31,7 +31,9 @@ jobs:
           context: .
           file: Dockerfile_php-fpm
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/php-fpm:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/php-frm:latest
+            ${{ secrets.DOCKER_USERNAME }}/php-frm:${{ github.sha }}
 
       - name: Build and push Nginx image
         uses: docker/build-push-action@v3
@@ -39,7 +41,9 @@ jobs:
           context: .
           file: Dockerfile_nginx
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/nginx:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/nginx:latest
+            ${{ secrets.DOCKER_USERNAME }}/nginx:${{ github.sha }}
 
       - name: Build and push Filebeat image
         uses: docker/build-push-action@v3
@@ -47,7 +51,9 @@ jobs:
           context: .
           file: Dockerfile_firebeat
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/filebeat:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/filebeat:latest
+            ${{ secrets.DOCKER_USERNAME }}/filebeat:${{ github.sha }}
 
       - name: Notify Telegram on Success
         if: success()
